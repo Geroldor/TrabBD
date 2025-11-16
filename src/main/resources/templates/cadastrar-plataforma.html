@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Cadastrar Plataforma</title>
+</head>
+<body><h2>Cadastrar Plataforma</h2> <!-- Mensagem de Sucesso -->
+<div th:if="${sucesso}" style="color: green; font-weight: bold;">
+    <p th:text="${sucesso}"></p></div> <!-- Mensagem de Erro -->
+<div th:if="${erro}" style="color: red; font-weight: bold;"><p th:text="${erro}">
+
+</p>
+</div>
+<form th:action="@{/plataforma/salvar}" method="post" th:object="${plataforma}">
+    <label for="nomePlataforma">Nome:</label>
+    <input type="text" id="nomePlataforma" th:field="*{nomePlataforma}" required>
+    <br>
+    <button type="submit">Salvar</button>
+
+</form>
+<a th:href="@{/}">Voltar para o Início</a>
+</body>
+
+<h3>Lista de Plataformas Cadastradas</h3>
+<table>
+    <thead>
+    <tr>
+        <th>Nome</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>
+            <ul>
+                <li th:each="dev : ${listaPlataformas}"><span th:text="${dev.nomePlataforma}"> </span></li>
+            </ul>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</html>

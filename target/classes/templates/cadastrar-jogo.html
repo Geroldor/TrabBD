@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Cadastrar Jogo</title></head>
+<body><h2>Cadastrar Jogo</h2> <!-- MENSAGENS DE FEEDBACK -->
+<div th:if="${mensagemSucesso}" style="color: green; font-weight: bold;"><p th:text="${mensagemSucesso}"></p></div>
+<div th:if="${mensagemErro}" style="color: red; font-weight: bold;"><p th:text="${mensagemErro}"></p></div>
+<form th:action="@{/jogo/salvar}" method="post" th:object="${jogo}"> <!-- Título --> <label for="titulo">Título:</label>
+    <input type="text" id="titulo" th:field="*{titulo}" required><br><br>
+    <!-- Data de Lançamento -->
+    <label for="dataLancamento">Data de Lançamento:</label>
+    <input type="date" id="dataLancamento" th:field="*{dataLancamento}" required><br><br>
+
+    <!-- Desenvolvedora -->
+    <label for="idDesenvolvedora">Desenvolvedora:</label>
+    <select id="idDesenvolvedora" th:field="*{idDesenvolvedora}" required>
+        <option th:each="dev : ${desenvolvedoras}"
+                th:value="${dev.idDesenvolvedora}"
+                th:text="${dev.nomeDesenvolvedora}">
+        </option>
+    </select><br><br>
+
+    <!-- Plataforma -->
+    <label for="idPlataforma">Plataforma:</label>
+    <select id="idPlataforma" th:field="*{idPlataforma}" required>
+        <option th:each="plat : ${plataformas}"
+                th:value="${plat.idPlataforma}"
+                th:text="${plat.nomePlataforma}">
+        </option>
+    </select><br><br>
+
+    <!-- Gêneros -->
+    <label>Gêneros:</label><br>
+    <div th:each="genero : ${generos}">
+        <input type="checkbox" name="idsGeneros" th:value="${genero.idGenero}" id="genero__${genero.idGenero}">
+        <label th:for="${'genero__' + genero.idGenero}" th:text="${genero.nomeGenero}"></label><br>
+    </div>
+    <br>
+
+    <button type="submit">Salvar</button>
+</form>
+<a th:href="@{/}">Voltar para o Início</a>
+</body>
+</html>

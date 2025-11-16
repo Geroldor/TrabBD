@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+</body>
+<head>
+    <meta charset="UTF-8">
+    <title>Detalhes do Jogo</title>
+</head>
+
+<h2 th:text="${jogo.titulo}">Título do Jogo</h2>
+<p><strong>Data de Lançamento:</strong> <span th:text="${jogo.DataLancamento}"></span></p>
+<p><strong>Desenvolvedora:</strong> <span th:text="${desenvolvedora.nomeDesenvolvedora}"></span></p>
+<p><strong>Plataforma:</strong> <span th:text="${plataforma.nomePlataforma}"></span></p>
+<p><strong>Gêneros:</strong>
+    <span th:each="g : ${genero}">
+        <span th:text="${g.nomeGenero}">Gênero</span><span th:text="' '" />
+    </span>
+</p>
+<hr>
+
+<head>
+    <title>Avaliações do Jogo</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-top: 20px;
+            font-family: Arial, sans-serif;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        h2 {
+            color: #333;
+            font-family: Arial, sans-serif;
+        }
+    </style>
+</head>
+<body>
+<h2>Avaliações do Jogo - ID: <span th:text="${idJogo}"></span></h2>
+
+<table>
+    <thead>
+    <tr>
+        <th>ID Usuário</th>
+        <th>Nick</th>
+        <th>Data</th>
+        <th>História</th>
+        <th>Trilha Sonora</th>
+        <th>Gráficos</th>
+        <th>Gameplay</th>
+        <th>Dificuldade</th>
+        <th>Recomenda?</th>
+        <th>Comentário</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="a : ${avaliacoes}">
+        <td th:text="${a.id_usuario}"></td>
+        <td th:text="${a.nick}"></td>
+        <td th:text="${#dates.format(a.data_avaliacao, 'dd/MM/yyyy')}"></td>
+        <td th:text="${a.nota_historia}"></td>
+        <td th:text="${a.nota_trilha}"></td>
+        <td th:text="${a.nota_grafico}"></td>
+        <td th:text="${a.nota_gameplay}"></td>
+        <td th:text="${a.nota_dificuldade}"></td>
+        <td th:text="${a.recomenda} ? '✅ Sim' : '❌ Não'"></td>
+        <td th:text="${a.comentario} ?: '-'"></td>
+    </tr>
+    </tbody>
+</table>
+<a th:href="@{/jogo}">Voltar à lista de jogos</a>
+</body>
+</html>

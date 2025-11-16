@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Cadastrar Desenvolvedora
+    </title></head>
+<body><h2>Cadastrar Desenvolvedora</h2> <!-- Mensagem de Sucesso -->
+<div th:if="${sucesso}" style="color: green; font-weight: bold;">
+    <p th:text="${sucesso}"></p></div> <!-- Mensagem de Erro -->
+<div th:if="${erro}" style="color: red; font-weight: bold;"><p th:text="${erro}">
+
+</p>
+</div>
+<form th:action="@{/desenvolvedora/salvar}" method="post" th:object="${desenvolvedora}">
+    <label for="nomeDesenvolvedora">Nome:</label>
+    <input type="text" id="nomeDesenvolvedora" th:field="*{nomeDesenvolvedora}" required>
+    <br>
+    <button type="submit">Salvar</button>
+
+</form>
+<a th:href="@{/}">Voltar para o Início</a>
+</body>
+
+<hr/>
+<h3>Lista de Desenvolvedoras Cadastradas</h3>
+<table>
+    <thead>
+    <tr>
+        <th>Nome</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>
+            <ul>
+                <li th:each="dev : ${listaDesenvolvedoras}"><span th:text="${dev.nomeDesenvolvedora}"> </span></li>
+            </ul>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body> </html>

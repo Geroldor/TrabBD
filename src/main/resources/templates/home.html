@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+</head>
+<body>
+<h1>Bem-vindo ao Sistema de Avaliação de Jogos</h1>
+
+<!-- Mostra mensagem se o usuário estiver logado -->
+<p th:if="${session.usuarioLogado != null}">
+    Logado como: <strong th:text="${session.usuarioLogado.nick}"></strong> |
+    <a th:href="@{/logout}">Sair</a>
+</p>
+
+<nav>
+    <ul>
+
+        <!-- Somente se logado -->
+       <div th:if="${session.usuarioLogado != null}">
+           <li><a th:href="@{/jogo}">Jogos Cadastrados</a></li>
+           <li><a th:href="@{/avaliacao/form}">Avaliar Jogo</a></li>
+           <li><a th:href="@{/avaliacao/minhas-avaliacoes}">Minhas Avaliações</a></li>
+
+       </div>
+
+        <!-- Somente se NÃO estiver logado -->
+        <div th:if="${session.usuarioLogado == null}">
+            <!-- Visível para todos -->
+        <li><a th:href="@{/jogo/form}">Cadastrar Jogo</a></li>
+        <li><a th:href="@{/usuario/form}">Cadastrar Usuário</a></li>
+        <li><a th:href="@{/desenvolvedora/form}">Cadastrar Desenvolvedora</a></li>
+        <li><a th:href="@{/jogo}">Jogos Cadastrados</a></li>
+        <li><a th:href="@{/plataforma/form}">Cadastrar Plataforma</a></li>
+        <li><a th:href="@{/genero/form}">Cadastrar Gênero</a></li>
+
+        <a th:href="@{/login}">Login</a>
+
+        </li>
+      </div>
+    </ul>
+</nav>
+</body>
+</html>

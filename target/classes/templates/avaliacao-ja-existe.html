@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Avaliação já existe</title>
+</head>
+<body>
+<h2>Você já avaliou este jogo!</h2>
+
+<p>Deseja editar sua avaliação ou avaliar outro jogo?</p>
+
+<form th:action="@{/avaliacao/editar/{id}(id=${idJogo})}" method="get">
+    <button type="submit">Editar Avaliação</button>
+</form>
+
+<form th:action="@{/avaliacao/form}" method="get">
+    <button type="submit">Avaliar Outro Jogo</button>
+</form>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Realizar Avaliação</title>
+</head>
+<body>
+<h2>
+
+    <div th:if="${mensagemSucesso}" style="color: green;"><p th:text="${mensagemSucesso}"></p></div>
+    <div th:if="${mensagemErro}" style="color: red;"><p th:text="${mensagemErro}"></p></div>
+    <h2>Avaliar Jogo</h2>
+    <form th:action="@{/avaliacao/salvar}" method="post" th:object="${avaliacao}">
+        <br>
+        <label for="idJogo">Jogo:</label>
+        <select id="idJogo" th:field="*{idJogo}">
+            <option th:each="j : ${jogos}" th:value="${j.idJogo}" th:text="${j.titulo}"></option>
+        </select><br>
+
+        <label>Notas (1 a 10):</label><br>
+        História: <input type="number" th:field="*{notaHistoria}" min="1" max="10" required><br>
+        Trilha Sonora: <input type="number" th:field="*{notaTrilha}" min="1" max="10" required><br>
+        Gráfico: <input type="number" th:field="*{notaGrafico}" min="1" max="10" required><br>
+        Gameplay: <input type="number" th:field="*{notaGameplay}" min="1" max="10" required><br>
+        Dificuldade: <input type="number" th:field="*{notaDificuldade}" min="1" max="10" required><br>
+
+        <label>Recomendaria?</label>
+        <input type="checkbox" th:field="*{recomenda}"><br>
+
+        <label>Comentário:</label><br>
+        <textarea th:field="*{comentario}" rows="4" cols="50"></textarea><br>
+
+        <button type="submit">Enviar Avaliação</button>
+    </form>
+    <a th:href="@{/}">Voltar para o Início</a>
+
+</body>
+</html>

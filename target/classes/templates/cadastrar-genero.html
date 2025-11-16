@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Cadastrar Gênero</title>
+</head>
+<body><h2>Cadastrar Gênero</h2> <!-- Mensagem de Sucesso -->
+<div th:if="${sucesso}" style="color: green; font-weight: bold;">
+    <p th:text="${sucesso}"></p></div> <!-- Mensagem de Erro -->
+<div th:if="${erro}" style="color: red; font-weight: bold;"><p th:text="${erro}">
+
+</p>
+</div>
+<form th:action="@{/genero/salvar}" method="post" th:object="${genero}">
+    <label for="nomeGenero">Nome:</label>
+    <input type="text" id="nomeGenero" th:field="*{nomeGenero}" required>
+    <br>
+    <button type="submit">Salvar</button>
+
+</form>
+<a th:href="@{/}">Voltar para o Início</a>
+</body>
+
+<h3>Lista de Generos Cadastradas</h3>
+<table>
+    <thead>
+    <tr>
+        <th>Nome</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>
+            <ul>
+                <li th:each="dev : ${listaGeneros}"><span th:text="${dev.nomeGenero}"> </span></li>
+            </ul>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</html>

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Jogos Cadastrados</title>
+</head>
+<body>
+<h2>Jogos Cadastrados</h2>
+<ul>
+    <li th:each="jogo : ${jogos}">
+        <a th:href="@{'/jogo/' + ${jogo.idJogo}}" th:text="${jogo.titulo}">Nome do jogo</a>
+
+    </li>
+</ul>
+<a th:href="@{/}">Voltar para o Início</a>
+</body>
+</html>

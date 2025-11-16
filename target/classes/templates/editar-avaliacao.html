@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Editar Avaliação</title>
+</head>
+<body>
+<h2>Editar Avaliação</h2>
+
+<form th:action="@{/avaliacao/atualizar}" th:object="${avaliacao}" method="post">
+    <input type="hidden" th:field="*{idUsuario}" />
+    <input type="hidden" th:field="*{idJogo}" />
+
+    <label>História:</label>
+    <input type="number" th:field="*{notaHistoria}" min="0" max="10" required><br>
+
+    <label>Trilha Sonora:</label>
+    <input type="number" th:field="*{notaTrilha}" min="0" max="10" required><br>
+
+    <label>Gráfico:</label>
+    <input type="number" th:field="*{notaGrafico}" min="0" max="10" required><br>
+
+    <label>Gameplay:</label>
+    <input type="number" th:field="*{notaGameplay}" min="0" max="10" required><br>
+
+    <label>Dificuldade:</label>
+    <input type="number" th:field="*{notaDificuldade}" min="0" max="10" required><br>
+
+    <label>Recomendaria?</label>
+    <input type="checkbox" th:field="*{recomenda}" /><br>
+
+    <label>Comentário:</label>
+    <textarea th:field="*{comentario}" rows="4" cols="50"></textarea><br>
+
+    <button type="submit">Atualizar</button>
+</form>
+
+<a th:href="@{/jogo}">Cancelar e voltar</a>
+</body>
+</html>
