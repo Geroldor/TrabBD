@@ -2,44 +2,180 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Cadastrar Jogo</title></head>
-<body><h2>Cadastrar Jogo</h2> <!-- MENSAGENS DE FEEDBACK -->
-<div th:if="${mensagemSucesso}" style="color: green; font-weight: bold;"><p th:text="${mensagemSucesso}"></p></div>
-<div th:if="${mensagemErro}" style="color: red; font-weight: bold;"><p th:text="${mensagemErro}"></p></div>
-<form th:action="@{/jogo/salvar}" method="post" th:object="${jogo}"> <!-- Título --> <label for="titulo">Título:</label>
-    <input type="text" id="titulo" th:field="*{titulo}" required><br><br>
-    <!-- Data de Lançamento -->
-    <label for="dataLancamento">Data de Lançamento:</label>
-    <input type="date" id="dataLancamento" th:field="*{dataLancamento}" required><br><br>
+    <title>Cadastrar Jogo</title>
+    <script>
+        function validarFormulario() {
+            const checkboxes = document.querySelectorAll('input[name="idsGeneros"]:checked');
+            if (checkboxes.length === 0) {
+                alert("Selecione pelo menos um gênero.");
+                return false;
+            }
+            return true;
+        }
+    </script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    <!-- Desenvolvedora -->
-    <label for="idDesenvolvedora">Desenvolvedora:</label>
-    <select id="idDesenvolvedora" th:field="*{idDesenvolvedora}" required>
-        <option th:each="dev : ${desenvolvedoras}"
-                th:value="${dev.idDesenvolvedora}"
-                th:text="${dev.nomeDesenvolvedora}">
-        </option>
-    </select><br><br>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f7fa;
+            padding: 2rem;
+            display: flex;
+            justify-content: center;
+        }
 
-    <!-- Plataforma -->
-    <label for="idPlataforma">Plataforma:</label>
-    <select id="idPlataforma" th:field="*{idPlataforma}" required>
-        <option th:each="plat : ${plataformas}"
-                th:value="${plat.idPlataforma}"
-                th:text="${plat.nomePlataforma}">
-        </option>
-    </select><br><br>
+        .container {
+            background-color: #fff;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 600px;
+        }
 
-    <!-- Gêneros -->
-    <label>Gêneros:</label><br>
-    <div th:each="genero : ${generos}">
-        <input type="checkbox" name="idsGeneros" th:value="${genero.idGenero}" id="genero__${genero.idGenero}">
-        <label th:for="${'genero__' + genero.idGenero}" th:text="${genero.nomeGenero}"></label><br>
+        h2 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            margin-top: 1rem;
+            font-weight: bold;
+            color: #333;
+        }
+
+        input[type="text"],
+        input[type="date"],
+        select {
+            width: 100%;
+            padding: 0.6rem;
+            margin-top: 0.3rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        .checkbox-group {
+            margin-top: 0.5rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem 2rem; /* Espaçamento entre linhas e colunas */
+        }
+
+        .checkbox-group div {
+            display: flex;
+            align-items: center;
+            white-space: nowrap;
+        }
+
+        input[type="checkbox"] {
+            margin-right: 0.5rem;
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+
+
+        button {
+            margin-top: 1.5rem;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            font-size: 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+
+        a {
+            display: inline-block;
+            margin-top: 1.5rem;
+            text-decoration: none;
+            color: #3498db;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .mensagem {
+            margin-bottom: 1rem;
+            padding: 0.8rem 1rem;
+            border-radius: 5px;
+        }
+
+        .sucesso {
+            background-color: #e0f8e9;
+            color: #2e7d32;
+            border: 1px solid #b2dfdb;
+        }
+
+        .erro {
+            background-color: #fdecea;
+            color: #c62828;
+            border: 1px solid #f5c6cb;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2>Cadastrar Jogo</h2>
+
+    <!-- FEEDBACK -->
+    <div th:if="${mensagemSucesso}" class="mensagem sucesso">
+        <p th:text="${mensagemSucesso}"></p>
     </div>
-    <br>
+    <div th:if="${mensagemErro}" class="mensagem erro">
+        <p th:text="${mensagemErro}"></p>
+    </div>
 
-    <button type="submit">Salvar</button>
-</form>
-<a th:href="@{/}">Voltar para o Início</a>
+    <form th:action="@{/jogo/salvar}" method="post" th:object="${jogo}" onsubmit="return validarFormulario()">
+        <!-- Título -->
+        <label for="titulo">Título:</label>
+        <input type="text" id="titulo" th:field="*{titulo}" required>
+
+        <!-- Data -->
+        <label for="dataLancamento">Data de Lançamento:</label>
+        <input type="date" id="dataLancamento" th:field="*{dataLancamento}" required>
+
+        <!-- Desenvolvedora -->
+        <label for="idDesenvolvedora">Desenvolvedora:</label>
+        <select id="idDesenvolvedora" th:field="*{idDesenvolvedora}" required>
+            <option th:each="dev : ${desenvolvedoras}" th:value="${dev.idDesenvolvedora}"
+                    th:text="${dev.nomeDesenvolvedora}"></option>
+        </select>
+
+        <!-- Plataforma -->
+        <label for="idPlataforma">Plataforma:</label>
+        <select id="idPlataforma" th:field="*{idPlataforma}" required>
+            <option th:each="plat : ${plataformas}" th:value="${plat.idPlataforma}"
+                    th:text="${plat.nomePlataforma}"></option>
+        </select>
+
+        <!-- Gêneros -->
+        <label>Gêneros:</label>
+        <div class="checkbox-group">
+            <div th:each="genero : ${generos}">
+                <input type="checkbox" name="idsGeneros" th:value="${genero.idGenero}" id="genero__${genero.idGenero}">
+                <label th:for="${'genero__' + genero.idGenero}" th:text="${genero.nomeGenero}"></label>
+            </div>
+        </div>
+
+        <button type="submit">Salvar</button>
+    </form>
+
+    <a th:href="@{/}">← Voltar para o Início</a>
+</div>
 </body>
 </html>
