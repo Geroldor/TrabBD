@@ -3,39 +3,177 @@
 <head>
     <meta charset="UTF-8">
     <title>Cadastrar Gênero</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f7fa;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 500px;
+            margin-bottom: 2rem;
+        }
+
+        h2, h3 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            margin-top: 1rem;
+            font-weight: bold;
+            color: #333;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 0.6rem;
+            margin-top: 0.3rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        button {
+            margin-top: 1.5rem;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            font-size: 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+
+        a {
+            display: inline-block;
+            margin-top: 1.5rem;
+            text-decoration: none;
+            color: #3498db;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .mensagem {
+            margin-bottom: 1rem;
+            padding: 0.8rem 1rem;
+            border-radius: 5px;
+        }
+
+        .sucesso {
+            background-color: #e0f8e9;
+            color: #2e7d32;
+            border: 1px solid #b2dfdb;
+        }
+
+        .erro {
+            background-color: #fdecea;
+            color: #c62828;
+            border: 1px solid #f5c6cb;
+        }
+
+        table {
+            width: 100%;
+            max-width: 500px;
+            border-collapse: collapse;
+            background-color: #fff;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        th, td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+
+        th {
+            background-color: #3498db;
+            color: #fff;
+            font-weight: 600;
+        }
+
+        ul {
+            list-style-type: disc;
+            padding-left: 1.5rem;
+        }
+
+        li {
+            padding: 0.2rem 0;
+        }
+    </style>
 </head>
-<body><h2>Cadastrar Gênero</h2> <!-- Mensagem de Sucesso -->
-<div th:if="${sucesso}" style="color: green; font-weight: bold;">
-    <p th:text="${sucesso}"></p></div> <!-- Mensagem de Erro -->
-<div th:if="${erro}" style="color: red; font-weight: bold;"><p th:text="${erro}">
+<body>
 
-</p>
+<div class="container">
+    <h2>Cadastrar Gênero</h2>
+
+    <!-- Mensagem de Sucesso -->
+    <div th:if="${sucesso}" class="mensagem sucesso">
+        <p th:text="${sucesso}"></p>
+    </div>
+
+    <!-- Mensagem de Erro -->
+    <div th:if="${erro}" class="mensagem erro">
+        <p th:text="${erro}"></p>
+    </div>
+
+    <form th:action="@{/genero/salvar}" method="post" th:object="${genero}">
+        <label for="nomeGenero">Nome:</label>
+        <input type="text" id="nomeGenero" th:field="*{nomeGenero}" required>
+
+        <button type="submit">Salvar</button>
+    </form>
+
+    <a th:href="@{/}">← Voltar para o Início</a>
 </div>
-<form th:action="@{/genero/salvar}" method="post" th:object="${genero}">
-    <label for="nomeGenero">Nome:</label>
-    <input type="text" id="nomeGenero" th:field="*{nomeGenero}" required>
-    <br>
-    <button type="submit">Salvar</button>
 
-</form>
-<a th:href="@{/}">Voltar para o Início</a>
+<div class="container">
+    <h3>Lista de Gêneros Cadastrados</h3>
+    <table>
+        <thead>
+        <tr>
+            <th>Nome</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>
+                <ul>
+                    <li th:each="dev : ${listaGeneros}">
+                        <span th:text="${dev.nomeGenero}">Gênero</span>
+                    </li>
+                </ul>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
 </body>
-
-<h3>Lista de Generos Cadastradas</h3>
-<table>
-    <thead>
-    <tr>
-        <th>Nome</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-        <td>
-            <ul>
-                <li th:each="dev : ${listaGeneros}"><span th:text="${dev.nomeGenero}"> </span></li>
-            </ul>
-        </td>
-    </tr>
-    </tbody>
-</table>
 </html>
