@@ -2,15 +2,70 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Jogos Cadastrados</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f7fa;
+            padding: 2rem;
+            max-width: 600px;
+            margin: auto;
+        }
+
+        h2 {
+            color: #2c3e50;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        ul li {
+            background-color: #3498db;
+            margin-bottom: 0.8rem;
+            border-radius: 6px;
+            transition: background-color 0.3s ease;
+        }
+
+        ul li a {
+            display: block;
+            padding: 0.75rem 1rem;
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        ul li:hover {
+            background-color: #2980b9;
+        }
+
+        a.voltar {
+            display: inline-block;
+            margin-top: 2rem;
+            color: #3498db;
+            text-decoration: none;
+            font-weight: 600;
+            border: 2px solid #3498db;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        a.voltar:hover {
+            background-color: #3498db;
+            color: white;
+        }
+    </style>
 </head>
 <body>
 <h2>Jogos Cadastrados</h2>
+<a th:href="@{/}" class="voltar">← Voltar para o Início</a>
 <ul>
     <li th:each="jogo : ${jogos}">
         <a th:href="@{'/jogo/' + ${jogo.idJogo}}" th:text="${jogo.titulo}">Nome do jogo</a>
-
     </li>
 </ul>
-<a th:href="@{/}">Voltar para o Início</a>
 </body>
 </html>
