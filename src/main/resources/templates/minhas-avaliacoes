@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Minhas Avaliações</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-top: 20px;
+            font-family: Arial, sans-serif;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        h2 {
+            color: #333;
+            font-family: Arial, sans-serif;
+        }
+    </style>
+</head>
+<body>
+<h2>Minhas Avaliações</h2>
+
+<table>
+    <thead>
+    <tr>
+        <th>Jogo</th>
+        <th>Data</th>
+        <th>História</th>
+        <th>Trilha Sonora</th>
+        <th>Gráficos</th>
+        <th>Gameplay</th>
+        <th>Dificuldade</th>
+        <th>Recomenda?</th>
+        <th>Comentário</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="a : ${avaliacoes}">
+        <td th:text="${a.nomeJogo}"></td>
+        <td th:text="${#dates.format(a.data_avaliacao, 'dd/MM/yyyy')}"></td>
+        <td th:text="${a.nota_historia}"></td>
+        <td th:text="${a.nota_trilha}"></td>
+        <td th:text="${a.nota_grafico}"></td>
+        <td th:text="${a.nota_gameplay}"></td>
+        <td th:text="${a.nota_dificuldade}"></td>
+        <td th:text="${a.recomenda} ? '✅ Sim' : '❌ Não'"></td>
+        <td th:text="${a.comentario} ?: '-'"></td>
+    </tr>
+    </tbody>
+</table>
+
+<a th:href="@{/avaliacao/form}">Avaliar novo jogo</a>
+</body>
+</html>
