@@ -1,8 +1,84 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" />
     <title>Editar Avaliação</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f7fa;
+            padding: 2rem;
+            max-width: 500px;
+            margin: auto;
+        }
+
+        h2 {
+            color: #2c3e50;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        form {
+            background-color: #fff;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        label {
+            display: block;
+            margin-top: 1rem;
+            font-weight: 600;
+            color: #333;
+        }
+
+        input[type="number"],
+        textarea {
+            width: 100%;
+            padding: 0.5rem;
+            margin-top: 0.3rem;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 1rem;
+            resize: vertical;
+        }
+
+        input[type="checkbox"] {
+            margin-top: 0.6rem;
+            transform: scale(1.2);
+        }
+
+        button {
+            margin-top: 2rem;
+            width: 100%;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 0.75rem;
+            font-size: 1.1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            font-weight: 700;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+
+        a {
+            display: block;
+            margin-top: 1rem;
+            text-align: center;
+            color: #3498db;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
 <h2>Editar Avaliação</h2>
@@ -11,26 +87,26 @@
     <input type="hidden" th:field="*{idUsuario}" />
     <input type="hidden" th:field="*{idJogo}" />
 
-    <label>História:</label>
-    <input type="number" th:field="*{notaHistoria}" min="0" max="10" required><br>
+    <label for="notaHistoria">História:</label>
+    <input type="number" id="notaHistoria" th:field="*{notaHistoria}" min="0" max="10" required>
 
-    <label>Trilha Sonora:</label>
-    <input type="number" th:field="*{notaTrilha}" min="0" max="10" required><br>
+    <label for="notaTrilha">Trilha Sonora:</label>
+    <input type="number" id="notaTrilha" th:field="*{notaTrilha}" min="0" max="10" required>
 
-    <label>Gráfico:</label>
-    <input type="number" th:field="*{notaGrafico}" min="0" max="10" required><br>
+    <label for="notaGrafico">Gráfico:</label>
+    <input type="number" id="notaGrafico" th:field="*{notaGrafico}" min="0" max="10" required>
 
-    <label>Gameplay:</label>
-    <input type="number" th:field="*{notaGameplay}" min="0" max="10" required><br>
+    <label for="notaGameplay">Gameplay:</label>
+    <input type="number" id="notaGameplay" th:field="*{notaGameplay}" min="0" max="10" required>
 
-    <label>Dificuldade:</label>
-    <input type="number" th:field="*{notaDificuldade}" min="0" max="10" required><br>
+    <label for="notaDificuldade">Dificuldade:</label>
+    <input type="number" id="notaDificuldade" th:field="*{notaDificuldade}" min="0" max="10" required>
 
-    <label>Recomendaria?</label>
-    <input type="checkbox" th:field="*{recomenda}" /><br>
+    <label for="recomenda">Recomendaria?</label>
+    <input type="checkbox" id="recomenda" th:field="*{recomenda}" />
 
-    <label>Comentário:</label>
-    <textarea th:field="*{comentario}" rows="4" cols="50"></textarea><br>
+    <label for="comentario">Comentário:</label>
+    <textarea id="comentario" th:field="*{comentario}" rows="4" cols="50"></textarea>
 
     <button type="submit">Atualizar</button>
 </form>
