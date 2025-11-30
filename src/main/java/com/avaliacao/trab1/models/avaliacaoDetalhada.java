@@ -14,8 +14,15 @@ public class avaliacaoDetalhada {
     private int nota_dificuldade;
     private boolean recomenda;
     private String comentario;
+    private String nomeJogo;
 
+    public String getNomeJogo() {
+        return nomeJogo;
+    }
 
+    public void setNomeJogo(String nomeJogo) {
+        this.nomeJogo = nomeJogo;
+    }
 
     public int getId_usuario() {
         return id_usuario;
