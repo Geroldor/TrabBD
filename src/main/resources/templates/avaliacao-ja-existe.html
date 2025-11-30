@@ -3,18 +3,84 @@
 <head>
     <meta charset="UTF-8">
     <title>Avaliação já existe</title>
+    <style>
+        /* Reset básico */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Body */
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f7fa;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        /* Container centralizado */
+        .container {
+            background: #fff;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+        }
+
+        h2 {
+            margin-bottom: 1rem;
+            color: #2c3e50;
+            font-size: 1.5rem;
+        }
+
+        p {
+            margin-bottom: 1.5rem;
+            line-height: 1.4;
+        }
+
+        form {
+            margin-bottom: 1rem;
+        }
+
+        button {
+            background: #3498db;
+            color: #fff;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            font-size: 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.2s ease;
+        }
+
+        button:hover {
+            background: #2980b9;
+        }
+
+        button:focus {
+            outline: 2px solid #2980b9;
+            outline-offset: 2px;
+        }
+    </style>
 </head>
 <body>
-<h2>Você já avaliou este jogo!</h2>
+<div class="container">
+    <h2>Você já avaliou este jogo!</h2>
+    <p>Deseja editar sua avaliação ou avaliar outro jogo?</p>
 
-<p>Deseja editar sua avaliação ou avaliar outro jogo?</p>
+    <form th:action="@{/avaliacao/editar/{id}(id=${idJogo})}" method="get">
+        <button type="submit">Editar Avaliação</button>
+    </form>
 
-<form th:action="@{/avaliacao/editar/{id}(id=${idJogo})}" method="get">
-    <button type="submit">Editar Avaliação</button>
-</form>
-
-<form th:action="@{/avaliacao/form}" method="get">
-    <button type="submit">Avaliar Outro Jogo</button>
-</form>
+    <form th:action="@{/avaliacao/form}" method="get">
+        <button type="submit">Avaliar Outro Jogo</button>
+    </form>
+</div>
 </body>
 </html>
