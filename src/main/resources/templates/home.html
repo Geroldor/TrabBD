@@ -1,8 +1,75 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" />
     <title>Home</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f7fa;
+            padding: 2rem;
+            max-width: 600px;
+            margin: auto;
+        }
+
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        p {
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+            color: #444;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        nav ul li {
+            background-color: #3498db;
+            border-radius: 6px;
+            padding: 0.6rem 1rem;
+            transition: background-color 0.3s ease;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        nav ul li:hover {
+            background-color: #2980b9;
+        }
+
+        nav a.login-link {
+            display: inline-block;
+            margin-top: 1rem;
+            text-align: center;
+            color: #3498db;
+            font-weight: 600;
+            text-decoration: none;
+            border: 2px solid #3498db;
+            padding: 0.4rem 1rem;
+            border-radius: 6px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        nav a.login-link:hover {
+            background-color: #3498db;
+            color: white;
+        }
+    </style>
 </head>
 <body>
 <h1>Bem-vindo ao Sistema de Avaliação de Jogos</h1>
@@ -15,30 +82,44 @@
 
 <nav>
     <ul>
-
-        <!-- Somente se logado -->
-       <div th:if="${session.usuarioLogado != null}">
-           <li><a th:href="@{/jogo}">Jogos Cadastrados</a></li>
-           <li><a th:href="@{/avaliacao/form}">Avaliar Jogo</a></li>
-           <li><a th:href="@{/avaliacao/minhas-avaliacoes}">Minhas Avaliações</a></li>
-
-       </div>
-
-        <!-- Somente se NÃO estiver logado -->
-        <div th:if="${session.usuarioLogado == null}">
-            <!-- Visível para todos -->
-        <li><a th:href="@{/jogo/form}">Cadastrar Jogo</a></li>
-        <li><a th:href="@{/usuario/form}">Cadastrar Usuário</a></li>
-        <li><a th:href="@{/desenvolvedora/form}">Cadastrar Desenvolvedora</a></li>
-        <li><a th:href="@{/jogo}">Jogos Cadastrados</a></li>
-        <li><a th:href="@{/plataforma/form}">Cadastrar Plataforma</a></li>
-        <li><a th:href="@{/genero/form}">Cadastrar Gênero</a></li>
-
-        <a th:href="@{/login}">Login</a>
-
+        <!-- Links para usuário logado -->
+        <li th:if="${session.usuarioLogado != null}">
+            <a th:href="@{/jogo}">Jogos Cadastrados</a>
         </li>
-      </div>
+        <li th:if="${session.usuarioLogado != null}">
+            <a th:href="@{/avaliacao/form}">Avaliar Jogo</a>
+        </li>
+        <li th:if="${session.usuarioLogado != null}">
+            <a th:href="@{/avaliacao/minhas-avaliacoes}">Minhas Avaliações</a>
+        </li>
+
+        <!-- Links para usuário não logado -->
+        <li th:if="${session.usuarioLogado == null}">
+            <a th:href="@{/jogo/form}">Cadastrar Jogo</a>
+        </li>
+        <li th:if="${session.usuarioLogado == null}">
+            <a th:href="@{/usuario/form}">Cadastrar Usuário</a>
+        </li>
+        <li th:if="${session.usuarioLogado == null}">
+            <a th:href="@{/desenvolvedora/form}">Cadastrar Desenvolvedora</a>
+        </li>
+        <li th:if="${session.usuarioLogado == null}">
+            <a th:href="@{/jogo}">Jogos Cadastrados</a>
+        </li>
+        <li th:if="${session.usuarioLogado == null}">
+            <a th:href="@{/plataforma/form}">Cadastrar Plataforma</a>
+        </li>
+        <li th:if="${session.usuarioLogado == null}">
+            <a th:href="@{/genero/form}">Cadastrar Gênero</a>
+        </li>
+        <li th:if="${session.usuarioLogado == null}">
+            <a th:href="@{/relatorios}">Relatórios</a>
+        </li>
+
     </ul>
+    <div th:if="${session.usuarioLogado == null}" style="text-align:center;">
+        <a th:href="@{/login}" class="login-link">Login</a>
+    </div>
 </nav>
 </body>
 </html>
