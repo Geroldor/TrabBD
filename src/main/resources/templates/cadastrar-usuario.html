@@ -2,21 +2,128 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Cadastrar Usuário</title></head>
-<body><h2>Cadastrar Usuário</h2> <!-- Mensagens -->
-<div th:if="${sucesso}" style="color: green;"><p th:text="${sucesso}"></p></div>
-<div th:if="${erro}" style="color: red;"><p th:text="${erro}"></p></div>
-<form th:action="@{/usuario/salvar}" method="post" th:object="${usuario}"><label>Nick:</label> <input type="text"
-                                                                                                      th:field="*{nick}"
-                                                                                                      required><br>
-    <label>Email:</label>
-    <input type="email" th:field="*{email}" required><br>
+    <title>Cadastrar Usuário</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    <label>Senha:</label>
-    <input type="password" th:field="*{senha}" required><br>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f7fa;
+            padding: 2rem;
+            display: flex;
+            justify-content: center;
+        }
 
-    <button type="submit">Salvar</button>
-</form>
-<a th:href="@{/}">Voltar para o Início</a>
+        .container {
+            background-color: #fff;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 500px;
+        }
+
+        h2 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            margin-top: 1rem;
+            font-weight: bold;
+            color: #333;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"] {
+            width: 100%;
+            padding: 0.6rem;
+            margin-top: 0.3rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        button {
+            margin-top: 1.5rem;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            font-size: 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+
+        a {
+            display: inline-block;
+            margin-top: 1.5rem;
+            text-decoration: none;
+            color: #3498db;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .mensagem {
+            margin-bottom: 1rem;
+            padding: 0.8rem 1rem;
+            border-radius: 5px;
+        }
+
+        .sucesso {
+            background-color: #e0f8e9;
+            color: #2e7d32;
+            border: 1px solid #b2dfdb;
+        }
+
+        .erro {
+            background-color: #fdecea;
+            color: #c62828;
+            border: 1px solid #f5c6cb;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2>Cadastrar Usuário</h2>
+
+    <!-- Mensagens -->
+    <div th:if="${sucesso}" class="mensagem sucesso">
+        <p th:text="${sucesso}"></p>
+    </div>
+
+    <div th:if="${erro}" class="mensagem erro">
+        <p th:text="${erro}"></p>
+    </div>
+
+    <form th:action="@{/usuario/salvar}" method="post" th:object="${usuario}">
+        <label for="nick">Nick:</label>
+        <input type="text" id="nick" th:field="*{nick}" required>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" th:field="*{email}" required>
+
+        <label for="senha">Senha:</label>
+        <input type="password" id="senha" th:field="*{senha}" required>
+
+        <button type="submit">Salvar</button>
+    </form>
+
+    <a th:href="@{/}">← Voltar para o Início</a>
+</div>
 </body>
 </html>
