@@ -1,6 +1,8 @@
 package com.avaliacao.trab1.repository;
 
 import java.util.List;
+import java.util.Map;
+
 import com.avaliacao.trab1.models.avaliacao;
 import com.avaliacao.trab1.models.avaliacaoDetalhada;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +40,16 @@ public class avaliacaoDAO {
         return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(avaliacaoDetalhada.class), idJogo);
     }
 
+    public List<avaliacaoDetalhada> listarAvaliacoesDoUsuario(int idUsuario) {
+        String sql = """
+        SELECT a.*, j.titulo AS nome_jogo
+        FROM t1.avaliacao a
+        JOIN t1.jogo j ON a.id_jogo = j.id_jogo
+        WHERE a.id_usuario = ?
+        """;
+        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(avaliacaoDetalhada.class), idUsuario);
+    }
+
     public boolean avaliacaoExiste(int idUsuario, int idJogo) {
         String sql = "SELECT COUNT(*) FROM t1.avaliacao WHERE id_usuario = ? AND id_jogo = ?";
         Integer count = jdbcTemplate.queryForObject(sql, Integer.class, idUsuario, idJogo);
@@ -63,7 +75,4 @@ public class avaliacaoDAO {
                 avaliacao.getIdUsuario(),
                 avaliacao.getIdJogo());
     }
-
-
-
 }
